@@ -29,6 +29,7 @@ extension ViewController {
     
     func setupView() {
         hideResultView()
+        imageView.image = UIImage(named: Constants.images[0].file)
     }
     
     func showResultView(with text: String? = nil) {

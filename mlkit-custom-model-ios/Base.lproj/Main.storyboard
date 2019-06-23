@@ -27,6 +27,10 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="200" id="zVb-mn-SK9"/>
                                 </constraints>
+                                <connections>
+                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="AK2-PF-ebU"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="voy-5p-Luo"/>
+                                </connections>
                             </pickerView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Wnu-8r-wgG">
                                 <rect key="frame" x="0.0" y="44" width="414" height="650"/>
