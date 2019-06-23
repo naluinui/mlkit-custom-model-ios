@@ -33,6 +33,48 @@ class ViewController: UIViewController {
         downloadRemoteModel()
     }
     
+    // MARK: IBAction
+    
+    @IBAction func detectButtonDidTouch(_ sender: UIButton) {
+        
+        guard let image = imageView.image else {
+            showResultView(with: "Image cannot be nil")
+            return
+        }
+        
+        // Load model
+        if isRemoteModelDownloaded {
+            showResultView(with: "Loading the remote model...\n")
+            loadRemoteModel()
+        } else {
+            showResultView(with: "Loading the local model...\n")
+            loadLocalModel()
+        }
+        
+        // Convert image to data
+        let data = manager.scaledImageData(from: image, with: Constants.imageSize, componentCount: Constants.componentCount, elementType: Constants.elementType, batchSize: Constants.batchSize)
+        
+        // TODO: Detect pose
+        /*
+        manager.detectObjects(in: data, topResultsCount: Constants.topResultsCount) { (result, error) in
+            
+            if let error = error {
+                self.showResultView(with: error.localizedDescription)
+                return
+            }
+            
+            var inferenceMessageString = "Inference results using "
+            if self.isRemoteModelDownloaded {
+                inferenceMessageString += "remote model:\n"
+            } else {
+                inferenceMessageString += "local model:\n"
+            }
+            
+            self.showResultView(with: inferenceMessageString + self.detectionResultsString(fromResults: result))
+        }
+        */
+    }
+    
     // MARK: Model
     
     private func setUpRemoteModel() {
