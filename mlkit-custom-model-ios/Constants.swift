@@ -30,12 +30,15 @@ struct Constants {
         NSNumber(value: labelsInfo.count)
     ]
     
-    static let images = [
+    public static let images = [
         ImageDisplay(file: "000000151859.jpg", name: "Jumping"),
         ImageDisplay(file: "000000206278.jpg", name: "Skating"),
         ImageDisplay(file: "000000430193.jpg", name: "Skiing"),
         ImageDisplay(file: "000000414047.jpg", name: "Running")
     ]
+    
+    
+    public static let isRemoteModelDownloadedUserDefaultsKey = "isRemoteModelDownloaded"
     
 }
 

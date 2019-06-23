@@ -7,8 +7,17 @@
 //
 
 import UIKit
+import FirebaseMLCommon
+import FirebaseMLModelInterpreter
 
 class ViewController: UIViewController {
+    
+    private lazy var manager = ModelInterpreterManager()
+    
+    private var isRemoteModelDownloaded: Bool {
+        return UserDefaults.standard.bool(forKey: Constants.isRemoteModelDownloadedUserDefaultsKey)
+    }
+    private var isLocalModelLoaded = false
     
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var pickerView: UIPickerView!
@@ -19,6 +28,106 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
+        setUpLocalModel()
+        setUpRemoteModel()
+        downloadRemoteModel()
+    }
+    
+    // MARK: Model
+    
+    private func setUpRemoteModel() {
+        let modelName = Constants.modelInfo.name
+        if !manager.setUpRemoteModel(name: modelName) {
+            showResultView(with: "\(resultView.text ?? "")\nFailed to set up the `\(modelName)` " +
+                "remote model.")
+        }
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(remoteModelDownloadDidSucceed(_:)),
+            name: .firebaseMLModelDownloadDidSucceed,
+            object: nil
+        )
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(remoteModelDownloadDidFail(_:)),
+            name: .firebaseMLModelDownloadDidFail,
+            object: nil
+        )
+    }
+    
+    private func setUpLocalModel() {
+        let modelName = Constants.modelInfo.name
+        if !manager.setUpLocalModel(name: modelName, filename: modelName, type: Constants.modelInfo.extension) {
+            showResultView(with: "\(resultView.text ?? "")\nFailed to set up the local model.")
+        }
+    }
+    
+    private func downloadRemoteModel() {
+        let name = Constants.modelInfo.name
+        let modelManager = ModelManager.modelManager()
+        guard let remoteModel = modelManager.remoteModel(withName: name) else {
+            showResultView(with: "Failed to download remote model with name: \(name) because the model " +
+                "was not registered with the Model Manager.")
+            return
+        }
+        downloadProgressView.observedProgress = modelManager.download(remoteModel)
+    }
+    
+    private func loadLocalModel() {
+        if !manager.loadLocalModel(isQuantizedModel: Constants.elementType == .uInt8, inputOutputIndex: Constants.inputOutputIndex, inputDimensions: Constants.inputDimensions, outputDimensions: Constants.outputDimensions) {
+            showResultView(with: "Failed to load the local model.")
+            return
+        }
+        isLocalModelLoaded = true
+    }
+    
+    private func loadRemoteModel() {
+        if !manager.loadRemoteModel(isQuantizedModel: Constants.elementType == .uInt8, inputOutputIndex: Constants.inputOutputIndex, inputDimensions: Constants.inputDimensions, outputDimensions: Constants.outputDimensions) {
+            showResultView(with: "Failed to load the remote model.")
+        }
+    }
+    
+    // MARK: Notifications
+    
+    @objc
+    private func remoteModelDownloadDidSucceed(_ notification: Notification) {
+        let notificationHandler = {
+            self.showResultView(with: nil)
+            guard let userInfo = notification.userInfo,
+                let remoteModel =
+                userInfo[ModelDownloadUserInfoKey.remoteModel.rawValue] as? RemoteModel
+                else {
+                    self.showResultView(with: "firebaseMLModelDownloadDidSucceed notification posted without a " +
+                        "RemoteModel instance.")
+                    return
+            }
+            UserDefaults.standard.set(true, forKey: Constants.isRemoteModelDownloadedUserDefaultsKey)
+            self.detectButton.isEnabled = true
+            self.showResultView(with: "Successfully downloaded the remote model with name: " + "\(remoteModel.name). The model is ready for detection.")
+        }
+        if Thread.isMainThread { notificationHandler(); return }
+        DispatchQueue.main.async { notificationHandler() }
+    }
+    
+    @objc
+    private func remoteModelDownloadDidFail(_ notification: Notification) {
+        let notificationHandler = {
+            self.showResultView(with: nil)
+            self.detectButton.isEnabled = true
+            guard let userInfo = notification.userInfo,
+                let remoteModel =
+                userInfo[ModelDownloadUserInfoKey.remoteModel.rawValue] as? RemoteModel,
+                let error = userInfo[ModelDownloadUserInfoKey.error.rawValue] as? NSError
+                else {
+                    self.showResultView(with: "firebaseMLModelDownloadDidFail notification posted without a " +
+                        "RemoteModel instance or error.")
+                    return
+            }
+            self.showResultView(with: "Failed to download the remote model with name: " +
+                "\(remoteModel.name), error: \(error).")
+        }
+        if Thread.isMainThread { notificationHandler(); return }
+        DispatchQueue.main.async { notificationHandler() }
     }
 
 }

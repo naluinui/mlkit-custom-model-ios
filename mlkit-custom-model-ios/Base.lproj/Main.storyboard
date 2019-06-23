@@ -46,6 +46,9 @@
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Detect"/>
+                                <connections>
+                                    <action selector="detectButtonDidTouch:" destination="BYZ-38-t0r" eventType="touchUpInside" id="TQL-49-t5N"/>
+                                </connections>
                             </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="p4f-Fb-SEe">
                                 <rect key="frame" x="16" y="60" width="382" height="94"/>
