@@ -15,6 +15,9 @@
 		AF4B751B22BF63DA0062680D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF4B751922BF63DA0062680D /* LaunchScreen.storyboard */; };
 		AF4B752322BF65A10062680D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AF4B752222BF65A10062680D /* GoogleService-Info.plist */; };
 		AF4B752522BF67BA0062680D /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = AF4B752422BF67BA0062680D /* .gitignore */; };
+		AF4B752722BF68C70062680D /* ModelInterpreterManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B752622BF68C70062680D /* ModelInterpreterManager.swift */; };
+		AF4B752922BF69190062680D /* UIImage+TFLite.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B752822BF69190062680D /* UIImage+TFLite.swift */; };
+		AF4B752B22BF691E0062680D /* Data+Buffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B752A22BF691E0062680D /* Data+Buffer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +33,9 @@
 		AF4B751C22BF63DA0062680D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AF4B752222BF65A10062680D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		AF4B752422BF67BA0062680D /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = SOURCE_ROOT; };
+		AF4B752622BF68C70062680D /* ModelInterpreterManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelInterpreterManager.swift; sourceTree = "<group>"; };
+		AF4B752822BF69190062680D /* UIImage+TFLite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+TFLite.swift"; sourceTree = "<group>"; };
+		AF4B752A22BF691E0062680D /* Data+Buffer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Data+Buffer.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +91,9 @@
 			children = (
 				AF4B751022BF63D80062680D /* AppDelegate.swift */,
 				AF4B751222BF63D80062680D /* ViewController.swift */,
+				AF4B752622BF68C70062680D /* ModelInterpreterManager.swift */,
+				AF4B752822BF69190062680D /* UIImage+TFLite.swift */,
+				AF4B752A22BF691E0062680D /* Data+Buffer.swift */,
 				AF4B751422BF63D80062680D /* Main.storyboard */,
 				AF4B751722BF63DA0062680D /* Assets.xcassets */,
 				AF4B751922BF63DA0062680D /* LaunchScreen.storyboard */,
@@ -220,8 +229,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF4B752722BF68C70062680D /* ModelInterpreterManager.swift in Sources */,
 				AF4B751322BF63D80062680D /* ViewController.swift in Sources */,
 				AF4B751122BF63D80062680D /* AppDelegate.swift in Sources */,
+				AF4B752B22BF691E0062680D /* Data+Buffer.swift in Sources */,
+				AF4B752922BF69190062680D /* UIImage+TFLite.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
