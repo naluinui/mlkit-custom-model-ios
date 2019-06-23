@@ -103,8 +103,8 @@
 			children = (
 				AF4B751022BF63D80062680D /* AppDelegate.swift */,
 				AF4B751222BF63D80062680D /* ViewController.swift */,
-				AF4B752E22BF6B720062680D /* Constants.swift */,
 				AF4B752622BF68C70062680D /* ModelInterpreterManager.swift */,
+				AF4B752E22BF6B720062680D /* Constants.swift */,
 				AF4B752822BF69190062680D /* UIImage+TFLite.swift */,
 				AF4B752A22BF691E0062680D /* Data+Buffer.swift */,
 				AF4B753022BF6B910062680D /* Resources */,
