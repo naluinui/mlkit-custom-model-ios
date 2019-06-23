@@ -46,6 +46,8 @@
 		AF4B753322BF6B9F0062680D /* 000000430193.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 000000430193.jpg; sourceTree = "<group>"; };
 		AF4B753522BF6BA40062680D /* 000000206278.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 000000206278.jpg; sourceTree = "<group>"; };
 		AF4B753722BF6BA80062680D /* 000000414047.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 000000414047.jpg; sourceTree = "<group>"; };
+		AF4B753922BF6D350062680D /* hourglass-model.tflite */ = {isa = PBXFileReference; lastKnownFileType = file; path = "hourglass-model.tflite"; sourceTree = "<group>"; };
+		AF4B753A22BF6D380062680D /* cpm-model.tflite */ = {isa = PBXFileReference; lastKnownFileType = file; path = "cpm-model.tflite"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +120,8 @@
 		AF4B753022BF6B910062680D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				AF4B753922BF6D350062680D /* hourglass-model.tflite */,
+				AF4B753A22BF6D380062680D /* cpm-model.tflite */,
 				AF4B753122BF6B9B0062680D /* 000000151859.jpg */,
 				AF4B753322BF6B9F0062680D /* 000000430193.jpg */,
 				AF4B753522BF6BA40062680D /* 000000206278.jpg */,
