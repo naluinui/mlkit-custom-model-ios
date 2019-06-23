@@ -13,6 +13,8 @@
 		AF4B751622BF63D80062680D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF4B751422BF63D80062680D /* Main.storyboard */; };
 		AF4B751822BF63DA0062680D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AF4B751722BF63DA0062680D /* Assets.xcassets */; };
 		AF4B751B22BF63DA0062680D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF4B751922BF63DA0062680D /* LaunchScreen.storyboard */; };
+		AF4B752322BF65A10062680D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AF4B752222BF65A10062680D /* GoogleService-Info.plist */; };
+		AF4B752522BF67BA0062680D /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = AF4B752422BF67BA0062680D /* .gitignore */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,8 @@
 		AF4B751722BF63DA0062680D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AF4B751A22BF63DA0062680D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AF4B751C22BF63DA0062680D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AF4B752222BF65A10062680D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		AF4B752422BF67BA0062680D /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,13 +58,13 @@
 				12D7A5E82AF83FD008077BC1 /* Pods-mlkit-custom-model-ios.debug.xcconfig */,
 				A6586EF4035667E2FAF48DED /* Pods-mlkit-custom-model-ios.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
 		AF4B750422BF63D80062680D = {
 			isa = PBXGroup;
 			children = (
+				AF4B752422BF67BA0062680D /* .gitignore */,
 				AF4B750F22BF63D80062680D /* mlkit-custom-model-ios */,
 				AF4B750E22BF63D80062680D /* Products */,
 				6146A66C0DC5ED9D22BCA43F /* Pods */,
@@ -85,6 +89,7 @@
 				AF4B751722BF63DA0062680D /* Assets.xcassets */,
 				AF4B751922BF63DA0062680D /* LaunchScreen.storyboard */,
 				AF4B751C22BF63DA0062680D /* Info.plist */,
+				AF4B752222BF65A10062680D /* GoogleService-Info.plist */,
 			);
 			path = "mlkit-custom-model-ios";
 			sourceTree = "<group>";
@@ -149,6 +154,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF4B752522BF67BA0062680D /* .gitignore in Resources */,
+				AF4B752322BF65A10062680D /* GoogleService-Info.plist in Resources */,
 				AF4B751B22BF63DA0062680D /* LaunchScreen.storyboard in Resources */,
 				AF4B751822BF63DA0062680D /* Assets.xcassets in Resources */,
 				AF4B751622BF63D80062680D /* Main.storyboard in Resources */,
