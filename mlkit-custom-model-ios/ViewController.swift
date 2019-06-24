@@ -20,6 +20,7 @@ class ViewController: UIViewController {
     private var isLocalModelLoaded = false
     
     @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var jointView: JointView!
     @IBOutlet weak var pickerView: UIPickerView!
     @IBOutlet weak var resultView: UITextView!
     @IBOutlet weak var downloadProgressView: UIProgressView!
@@ -29,8 +30,8 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         setupView()
         setUpLocalModel()
-        setUpRemoteModel()
-        downloadRemoteModel()
+        //setUpRemoteModel()
+        //downloadRemoteModel()
     }
     
     // MARK: IBAction
@@ -43,20 +44,19 @@ class ViewController: UIViewController {
         }
         
         // Load model
-        if isRemoteModelDownloaded {
-            showResultView(with: "Loading the remote model...\n")
-            loadRemoteModel()
-        } else {
+//        if isRemoteModelDownloaded {
+//            showResultView(with: "Loading the remote model...\n")
+//            loadRemoteModel()
+//        } else {
             showResultView(with: "Loading the local model...\n")
             loadLocalModel()
-        }
+//        }
         
         // Convert image to data
         let data = manager.scaledImageData(from: image, with: Constants.imageSize, componentCount: Constants.componentCount, elementType: Constants.elementType, batchSize: Constants.batchSize)
         
         // TODO: Detect pose
-        /*
-        manager.detectObjects(in: data, topResultsCount: Constants.topResultsCount) { (result, error) in
+        manager.detectObjects(in: data) { (bodyPoints, error) in
             
             if let error = error {
                 self.showResultView(with: error.localizedDescription)
@@ -70,9 +70,13 @@ class ViewController: UIViewController {
                 inferenceMessageString += "local model:\n"
             }
             
-            self.showResultView(with: inferenceMessageString + self.detectionResultsString(fromResults: result))
+            guard let bodyPoints = bodyPoints else {
+                return
+            }
+            print("output: \(String(describing: bodyPoints))")
+            
+            self.jointView.bodyPoints = bodyPoints
         }
-        */
     }
     
     // MARK: Model

@@ -11,23 +11,24 @@ import FirebaseMLModelInterpreter
 
 struct Constants {
     
-    public static let modelInfo = (name: "hourglass-model", extension: "tflite")
     public static let labelsInfo = (name: "labels", extension: "txt", count: 2)
-    public static let topResultsCount: Int = 2
-    public static let componentCount: Int = 1
+    public static let modelInfo = (name: "cpm-model", extension: "tflite")
+    public static let componentCount: Int = 3
     public static let batchSize: Int = 1
-    public static let imageSize = CGSize(width: 60, height: 250)
+    public static let imageSize = CGSize(width: 192, height: 192)
     public static let elementType = ModelElementType.float32
     public static let inputOutputIndex: UInt = 0
     public static let inputDimensions = [
         NSNumber(value: batchSize),
-        NSNumber(value: componentCount),
         NSNumber(value: Int(imageSize.height)),
         NSNumber(value: Int(imageSize.width)),
+        NSNumber(value: componentCount),
     ]
     public static let outputDimensions = [
         NSNumber(value: batchSize),
-        NSNumber(value: labelsInfo.count)
+        NSNumber(value: 96),
+        NSNumber(value: 96),
+        NSNumber(value: 14)
     ]
     
     public static let images = [

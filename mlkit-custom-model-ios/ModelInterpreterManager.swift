@@ -18,14 +18,13 @@ public enum ModelInterpreterError: Error {
 
 public class ModelInterpreterManager {
     
-    public typealias DetectObjectsCompletion = ([(label: String, confidence: Float)]?, Error?) -> Void
+    public typealias DetectPoseCompletion = ([BodyPoint?]?, Error?) -> Void
     
     private let modelInputOutputOptions = ModelInputOutputOptions()
     private var remoteModelOptions: ModelOptions?
     private var localModelOptions: ModelOptions?
     private var modelInterpreter: ModelInterpreter?
     private var modelElementType: ModelElementType = .float32
-    private var labels = [String]()
     
     public func setUpRemoteModel(name: String) -> Bool {
         let initialConditions = ModelDownloadConditions(
@@ -137,11 +136,7 @@ public class ModelInterpreterManager {
         return true
     }
     
-    public func detectObjects(
-        in imageData: Data?,
-        topResultsCount: Int,
-        completion: @escaping DetectObjectsCompletion
-        ) {
+    public func detectObjects(in imageData: Data?, completion: @escaping DetectPoseCompletion) {
         guard let imageData = imageData else {
             safeDispatchOnMain {
                 completion(nil, ModelInterpreterError.invalidImageData)
@@ -163,58 +158,20 @@ public class ModelInterpreterManager {
                 completion(nil, error)
                 return
             }
-            self.process(outputs, topResultsCount: topResultsCount, completion: completion)
+            self.process(outputs, completion: completion)
         }
     }
     
-    private func process(
-        _ outputs: ModelOutputs,
-        topResultsCount: Int,
-        completion: @escaping DetectObjectsCompletion
-        ) {
+    private func process(_ outputs: ModelOutputs, completion: @escaping DetectPoseCompletion) {
         
-        let output: [[NSNumber]]?
-        do {
-            // Get the output for the first batch, since the default batch size is 1.
-            output = try outputs.output(index: 0) as? [[NSNumber]]
-        } catch let error {
-            print("Failed to process detection outputs with error: \(error.localizedDescription)")
-            completion(nil, error)
-            return
-        }
+        let bodyPoints = outputs.toBodyPoints()
         
-        guard let firstOutput = output?.first else {
-            print("Failed to get the results array from output.")
+        if bodyPoints.count == 0 {
             completion(nil, ModelInterpreterError.invalidResults)
             return
         }
         
-        print(firstOutput.first!.floatValue)
-        
-        let confidences: [Float]
-        switch modelElementType {
-        case .uInt8:
-            confidences = firstOutput.map { quantizedValue in
-                Softmax.scale * Float(quantizedValue.intValue - Softmax.zeroPoint)
-            }
-        case .float32:
-            confidences = firstOutput.map { $0.floatValue }
-        default:
-            completion(nil, ModelInterpreterError.invalidModelDataType)
-            return
-        }
-        
-        print("output: \(String(describing: output))")
-        
-        // Create a zipped array of tuples [(labelIndex: Int, confidence: Float)].
-        let zippedResults = zip(labels.indices, confidences)
-        
-        // Sort the zipped results by confidence value in descending order.
-        let sortedResults = zippedResults.sorted { $0.1 > $1.1 }.prefix(topResultsCount)
-        
-        // Create an array of tuples with the results as [(label: String, confidence: Float)].
-        let results = sortedResults.isEmpty ? nil : sortedResults.map { (labels[$0], $1) }
-        completion(results, nil)
+        completion(bodyPoints, nil)
     }
     
     public func scaledImageData(

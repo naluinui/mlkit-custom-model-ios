@@ -29,11 +29,17 @@
                                 </connections>
                             </pickerView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Wnu-8r-wgG">
-                                <rect key="frame" x="0.0" y="44" width="414" height="646"/>
+                                <rect key="frame" x="0.0" y="138" width="414" height="414"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="Wnu-8r-wgG" secondAttribute="height" multiplier="1:1" id="Jxi-In-Qwe"/>
+                                </constraints>
                             </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mDk-1F-GPX" customClass="JointView" customModule="mlkit_custom_model_ios" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="138" width="414" height="414"/>
+                            </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MMY-zj-Rk1">
-                                <rect key="frame" x="147" y="630" width="120" height="44"/>
+                                <rect key="frame" x="147" y="568" width="120" height="44"/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="120" id="52n-91-Ivk"/>
@@ -47,7 +53,7 @@
                                 </connections>
                             </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="p4f-Fb-SEe">
-                                <rect key="frame" x="16" y="60" width="382" height="94"/>
+                                <rect key="frame" x="16" y="44" width="382" height="94"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="94" id="ZqI-Oh-qOV"/>
@@ -56,7 +62,7 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <progressView hidden="YES" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="ou7-4M-pLs">
-                                <rect key="frame" x="0.0" y="692" width="414" height="2"/>
+                                <rect key="frame" x="0.0" y="554" width="414" height="140"/>
                                 <color key="progressTintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </progressView>
                         </subviews>
@@ -64,17 +70,21 @@
                         <constraints>
                             <constraint firstItem="yTR-4i-UUL" firstAttribute="top" secondItem="ou7-4M-pLs" secondAttribute="bottom" constant="2" id="15b-1a-kEV"/>
                             <constraint firstItem="MMY-zj-Rk1" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="C40-DG-b2f"/>
+                            <constraint firstItem="mDk-1F-GPX" firstAttribute="top" secondItem="Wnu-8r-wgG" secondAttribute="top" id="HD6-S6-dDh"/>
                             <constraint firstAttribute="bottom" secondItem="yTR-4i-UUL" secondAttribute="bottom" id="Hul-Fj-yRn"/>
-                            <constraint firstItem="Wnu-8r-wgG" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="IvS-aC-Poa"/>
+                            <constraint firstItem="mDk-1F-GPX" firstAttribute="trailing" secondItem="Wnu-8r-wgG" secondAttribute="trailing" id="JgZ-dW-ky2"/>
+                            <constraint firstItem="p4f-Fb-SEe" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="Lh0-l1-P0P"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="p4f-Fb-SEe" secondAttribute="trailing" constant="16" id="QLr-un-OOe"/>
-                            <constraint firstItem="p4f-Fb-SEe" firstAttribute="top" secondItem="Wnu-8r-wgG" secondAttribute="top" constant="16" id="bC9-3d-093"/>
+                            <constraint firstItem="mDk-1F-GPX" firstAttribute="bottom" secondItem="Wnu-8r-wgG" secondAttribute="bottom" id="UUy-1E-e9z"/>
+                            <constraint firstItem="p4f-Fb-SEe" firstAttribute="bottom" secondItem="Wnu-8r-wgG" secondAttribute="top" id="bC9-3d-093"/>
                             <constraint firstItem="yTR-4i-UUL" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="d5V-yW-n8m"/>
                             <constraint firstItem="p4f-Fb-SEe" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="hEf-iH-p1T"/>
                             <constraint firstItem="Wnu-8r-wgG" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="hHK-II-XE2"/>
                             <constraint firstItem="ou7-4M-pLs" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="ifp-YF-Jgs"/>
-                            <constraint firstItem="MMY-zj-Rk1" firstAttribute="bottom" secondItem="Wnu-8r-wgG" secondAttribute="bottom" constant="-16" id="jmZ-Qq-0JA"/>
+                            <constraint firstItem="MMY-zj-Rk1" firstAttribute="top" secondItem="Wnu-8r-wgG" secondAttribute="bottom" constant="16" id="jmZ-Qq-0JA"/>
                             <constraint firstItem="yTR-4i-UUL" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="o5G-8t-LY9"/>
                             <constraint firstItem="ou7-4M-pLs" firstAttribute="top" secondItem="Wnu-8r-wgG" secondAttribute="bottom" constant="2" id="uS3-1q-vC0"/>
+                            <constraint firstItem="mDk-1F-GPX" firstAttribute="leading" secondItem="Wnu-8r-wgG" secondAttribute="leading" id="yYM-O5-AZF"/>
                             <constraint firstItem="Wnu-8r-wgG" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="z62-PF-koy"/>
                             <constraint firstAttribute="trailing" secondItem="ou7-4M-pLs" secondAttribute="trailing" id="zQC-hu-ZUZ"/>
                         </constraints>
@@ -84,6 +94,7 @@
                         <outlet property="detectButton" destination="MMY-zj-Rk1" id="WZc-Ax-Uby"/>
                         <outlet property="downloadProgressView" destination="ou7-4M-pLs" id="nfe-4T-P1w"/>
                         <outlet property="imageView" destination="Wnu-8r-wgG" id="eo3-uT-fQ6"/>
+                        <outlet property="jointView" destination="mDk-1F-GPX" id="N7V-U8-bvC"/>
                         <outlet property="pickerView" destination="yTR-4i-UUL" id="SAr-1k-3WQ"/>
                         <outlet property="resultView" destination="p4f-Fb-SEe" id="dBk-ZV-aTg"/>
                     </connections>

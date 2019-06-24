@@ -10,6 +10,29 @@ import UIKit
 import Accelerate
 
 extension UIImage {
+
+    func asRGBValues() -> [UInt8]? {
+        
+        var width = 0
+        var height = 0
+        var pixelValues: [UInt8]?
+        if let imageRef = self.cgImage {
+            width = imageRef.width
+            height = imageRef.height
+            let bitsPerComponent = imageRef.bitsPerComponent
+            let totalBytes = height * width
+            
+            let colorSpace = CGColorSpaceCreateDeviceRGB()
+            var intensities = [UInt8](repeating: 0, count: totalBytes)
+            
+            let contextRef = CGContext(data: &intensities, width: width, height: height, bitsPerComponent: bitsPerComponent, bytesPerRow: width*3, space: colorSpace, bitmapInfo: 0)
+            contextRef?.draw(imageRef, in: CGRect(x: 0.0, y: 0.0, width: CGFloat(width), height: CGFloat(height)))
+            
+            pixelValues = intensities
+        }
+        
+        return pixelValues
+    }
     
     func asGreyValues() -> [UInt8]? {
         
@@ -60,14 +83,14 @@ extension UIImage {
         }
         if isQuantized { return Data(bytes: scaledBytes) }
         let scaledFloats = scaledBytes.map { Float32($0) / Constant.maxRGBValue }
-        print(scaledFloats[...10])
+        print(scaledFloats[...20])
         return Data(copyingBufferOf: scaledFloats)
     }
     
     /// Returns the image data for the given CGImage based on the given `size`.
     private func imageData(from cgImage: CGImage, with size: CGSize) -> Data? {
         let bitmapInfo = CGBitmapInfo(
-            rawValue: CGBitmapInfo.byteOrder32Big.rawValue | CGImageAlphaInfo.premultipliedLast.rawValue
+            rawValue: CGBitmapInfo.floatComponents.rawValue // CGBitmapInfo.byteOrder32Big.rawValue | CGImageAlphaInfo.premultipliedLast.rawValue
         )
         let width = Int(size.width)
         let scaledBytesPerRow = (cgImage.bytesPerRow / cgImage.width) * width
