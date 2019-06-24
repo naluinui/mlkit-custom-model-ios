@@ -24,11 +24,11 @@ extension ModelOutputs {
             return []
         }
         
-        let heatmapHeight = outputBatch.count
-        let heatmapWidth = outputBatch.first?.count ?? 0
+        let heatmapWidth = outputBatch.count
+        let heatmapHeight = outputBatch.first?.count ?? 0
         let keypointCount = outputBatch.first?.first?.count ?? 0
         
-        guard outputBatch.count == 96, heatmapWidth == 96, keypointCount == 14 else {
+        guard heatmapWidth == 96, heatmapHeight == 96, keypointCount == 14 else {
             print("output shape is invalid (expected 1,96,96,14)")
             return []
         }
@@ -38,11 +38,11 @@ extension ModelOutputs {
         }
         
         for k in 0..<keypointCount {
-            for i in 0..<heatmapWidth {
-                for j in 0..<heatmapHeight {
+            for j in 0..<heatmapHeight {
+                for i in 0..<heatmapWidth {
                     let confidence = outputBatch[j][i][k].doubleValue
                     if (keypoints[k]?.maxConfidence ?? 0) < confidence {
-                        keypoints[k] = BodyPoint(maxPoint: CGPoint(x: CGFloat(j), y: CGFloat(i)), maxConfidence: confidence)
+                        keypoints[k] = BodyPoint(maxPoint: CGPoint(x: CGFloat(i), y: CGFloat(j)), maxConfidence: confidence)
                     }
                 }
             }

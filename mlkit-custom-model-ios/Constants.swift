@@ -20,8 +20,8 @@ struct Constants {
     public static let inputOutputIndex: UInt = 0
     public static let inputDimensions = [
         NSNumber(value: batchSize),
-        NSNumber(value: Int(imageSize.height)),
         NSNumber(value: Int(imageSize.width)),
+        NSNumber(value: Int(imageSize.height)),
         NSNumber(value: componentCount),
     ]
     public static let outputDimensions = [

@@ -32,7 +32,7 @@ class JointView: UIView {
         
         keypointLabelBGViews = (0..<keypointsCount).map { index in
             let color = Constant.colors[index%Constant.colors.count]
-            let v = UIView(frame: CGRect(x: 0, y: 0, width: 4, height: 4))
+            let v = UIView(frame: CGRect(x: 0, y: 0, width: 6, height: 6))
             v.backgroundColor = color
             v.clipsToBounds = false
             let l = UILabel(frame: CGRect(x: 4 + 3, y: -3, width: 100, height: 8))
@@ -50,7 +50,7 @@ class JointView: UIView {
             let color = Constant.colors[index%Constant.colors.count]
             if index == 2 || index == 8 { x += 28 }
             else { x += 14 }
-            let v = UIView(frame: CGRect(x: x, y: y + 10, width: 4, height: 4))
+            let v = UIView(frame: CGRect(x: x, y: y + 10, width: 6, height: 6))
             v.backgroundColor = color
             
             self.addSubview(v)
@@ -58,38 +58,38 @@ class JointView: UIView {
         }
     }
     
-//    override func draw(_ rect: CGRect) {
-//        if let ctx = UIGraphicsGetCurrentContext() {
-//
-//            ctx.clear(rect);
-//
-//            let size = self.bounds.size
-//
-//            let color = Constant.jointLineColor.cgColor
-//            if Constant.pointLabels.count == bodyPoints.count {
-//                let _ = Constant.connectingPointIndexs.map { pIndex1, pIndex2 in
-//                    if let bp1 = self.bodyPoints[pIndex1], bp1.maxConfidence > 0.5,
-//                        let bp2 = self.bodyPoints[pIndex2], bp2.maxConfidence > 0.5 {
-//                        let p1 = bp1.maxPoint
-//                        let p2 = bp2.maxPoint
-//                        let point1 = CGPoint(x: p1.x * size.width, y: p1.y*size.height)
-//                        let point2 = CGPoint(x: p2.x * size.width, y: p2.y*size.height)
-//                        drawLine(ctx: ctx, from: point1, to: point2, color: color)
-//                    }
-//                }
-//            }
-//        }
-//    }
-//
-//    private func drawLine(ctx: CGContext, from p1: CGPoint, to p2: CGPoint, color: CGColor) {
-//        ctx.setStrokeColor(color)
-//        ctx.setLineWidth(3.0)
-//
-//        ctx.move(to: p1)
-//        ctx.addLine(to: p2)
-//
-//        ctx.strokePath();
-//    }
+    override func draw(_ rect: CGRect) {
+        if let ctx = UIGraphicsGetCurrentContext() {
+
+            ctx.clear(rect);
+
+            let size = self.bounds.size
+
+            let color = Constant.jointLineColor.cgColor
+            if Constant.pointLabels.count == bodyPoints.count {
+                let _ = Constant.connectingPointIndexs.map { pIndex1, pIndex2 in
+                    if let bp1 = self.bodyPoints[pIndex1], bp1.maxConfidence > 0.5,
+                        let bp2 = self.bodyPoints[pIndex2], bp2.maxConfidence > 0.5 {
+                        let p1 = bp1.maxPoint
+                        let p2 = bp2.maxPoint
+                        let point1 = CGPoint(x: p1.x * size.width, y: p1.y*size.height)
+                        let point2 = CGPoint(x: p2.x * size.width, y: p2.y*size.height)
+                        drawLine(ctx: ctx, from: point1, to: point2, color: color)
+                    }
+                }
+            }
+        }
+    }
+
+    private func drawLine(ctx: CGContext, from p1: CGPoint, to p2: CGPoint, color: CGColor) {
+        ctx.setStrokeColor(color)
+        ctx.setLineWidth(6.0)
+
+        ctx.move(to: p1)
+        ctx.addLine(to: p2)
+
+        ctx.strokePath();
+    }
     
     private func drawKeypoints(with n_kpoints: [BodyPoint?]) {
         let imageFrame = bounds
