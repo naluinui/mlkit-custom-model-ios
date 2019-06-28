@@ -16,7 +16,6 @@ class CameraViewController: UIViewController {
     
     private var isInferencing = false
     private var videoCapture: VideoCapture!
-    private let measure = PerformanceMeasure()
     
     @IBOutlet weak var videoPreview: UIView!
     @IBOutlet weak var jointView: JointView!
@@ -25,18 +24,23 @@ class CameraViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setupView()
+        
         setUpCamera()
-        measure.delegate = self
-    }
-    
-    func detect(image: UIImage) {
         
         // Load model
         
         if !manager.loadModel() {
             updateStatus(with: "Failed to load the model.")
+        } else {
+            updateStatus(with: "Model loaded.")
         }
+    }
+    
+    func detect(image: UIImage) {
+        
+        self.isInferencing = true
         
         // Convert image to data
         
@@ -46,11 +50,8 @@ class CameraViewController: UIViewController {
         // Detect pose
         manager.detect(in: data) { (bodyPoints, error) in
             
-            self.measure.label(with: "endInference")
-            
             if let error = error {
                 self.updateStatus(with: error.localizedDescription)
-                self.measure.stop()
                 return
             }
             
@@ -60,7 +61,6 @@ class CameraViewController: UIViewController {
             print("output: \(String(describing: bodyPoints))")
             
             self.jointView.bodyPoints = bodyPoints
-            self.measure.stop()
             self.isInferencing = false
         }
     }
@@ -88,9 +88,9 @@ extension CameraViewController {
     func setUpCamera() {
         videoCapture = VideoCapture()
         videoCapture.delegate = self
-        videoCapture.fps = 30
+        videoCapture.fps = 10
+        
         videoCapture.setUp(sessionPreset: .vga640x480) { success in
-            
             if success {
                 // add preview view on the layer
                 if let previewLayer = self.videoCapture.previewLayer {
@@ -123,21 +123,9 @@ extension CameraViewController: VideoCaptureDelegate {
         // check if the captured image from camera is contained on pixelBuffer
         if !isInferencing, let pixelBuffer = pixelBuffer, let uiImage = UIImage(pixelBuffer: pixelBuffer) {
             
-            // start of measure
-            self.measure.start()
-            
             // predict
             self.detect(image: uiImage)
         }
         
     }
-}
-
-extension CameraViewController: PerformanceMeasureDelegate {
-    
-    func updateMeasure(inferenceTime: Double, executionTime: Double, fps: Int) {
-        updateStatus(with: "inference: \(Int(inferenceTime*1000.0)) mm execution: \(Int(executionTime*1000.0)) mm fps: \(fps)")
-
-    }
-    
 }
