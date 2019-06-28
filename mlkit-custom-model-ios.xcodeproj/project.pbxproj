@@ -21,7 +21,6 @@
 		AF4B752522BF67BA0062680D /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = AF4B752422BF67BA0062680D /* .gitignore */; };
 		AF4B752922BF69190062680D /* UIImage+TFLite.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B752822BF69190062680D /* UIImage+TFLite.swift */; };
 		AF4B752B22BF691E0062680D /* Data+Buffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B752A22BF691E0062680D /* Data+Buffer.swift */; };
-		AF4B752F22BF6B720062680D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B752E22BF6B720062680D /* Constants.swift */; };
 		AF4B753222BF6B9B0062680D /* 000000151859.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AF4B753122BF6B9B0062680D /* 000000151859.jpg */; };
 		AF4B753422BF6B9F0062680D /* 000000430193.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AF4B753322BF6B9F0062680D /* 000000430193.jpg */; };
 		AF4B753622BF6BA40062680D /* 000000206278.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AF4B753522BF6BA40062680D /* 000000206278.jpg */; };
@@ -48,7 +47,6 @@
 		AF4B752422BF67BA0062680D /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = SOURCE_ROOT; };
 		AF4B752822BF69190062680D /* UIImage+TFLite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+TFLite.swift"; sourceTree = "<group>"; };
 		AF4B752A22BF691E0062680D /* Data+Buffer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Data+Buffer.swift"; sourceTree = "<group>"; };
-		AF4B752E22BF6B720062680D /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		AF4B753122BF6B9B0062680D /* 000000151859.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 000000151859.jpg; sourceTree = "<group>"; };
 		AF4B753322BF6B9F0062680D /* 000000430193.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 000000430193.jpg; sourceTree = "<group>"; };
 		AF4B753522BF6BA40062680D /* 000000206278.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 000000206278.jpg; sourceTree = "<group>"; };
@@ -123,9 +121,8 @@
 		AF4B750F22BF63D80062680D /* mlkit-custom-model-ios */ = {
 			isa = PBXGroup;
 			children = (
-				AF4B752E22BF6B720062680D /* Constants.swift */,
-				AF2A532922C611C2006BF555 /* ModelConfigurations.swift */,
 				AF4B751022BF63D80062680D /* AppDelegate.swift */,
+				AF2A532922C611C2006BF555 /* ModelConfigurations.swift */,
 				AF2A532422C60785006BF555 /* CameraViewController.swift */,
 				AF2A532722C60FBF006BF555 /* ModelInterpreterManager.swift */,
 				AF04243122C271F100A2434D /* VideoCapture.swift */,
@@ -288,7 +285,6 @@
 				AF4B751122BF63D80062680D /* AppDelegate.swift in Sources */,
 				AF4B752B22BF691E0062680D /* Data+Buffer.swift in Sources */,
 				AF4B752922BF69190062680D /* UIImage+TFLite.swift in Sources */,
-				AF4B752F22BF6B720062680D /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

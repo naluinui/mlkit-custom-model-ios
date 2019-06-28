@@ -24,8 +24,7 @@ public class VideoCapture: NSObject {
     
     var lastTimestamp = CMTime()
     
-    public func setUp(sessionPreset: AVCaptureSession.Preset = .vga640x480,
-                      completion: @escaping (Bool) -> Void) {
+    public func setUp(sessionPreset: AVCaptureSession.Preset = .vga640x480, completion: @escaping (Bool) -> Void) {
         self.setUpCamera(sessionPreset: sessionPreset, completion: { success in
             completion(success)
         })
@@ -36,12 +35,9 @@ public class VideoCapture: NSObject {
         captureSession.beginConfiguration()
         captureSession.sessionPreset = sessionPreset
         
-        guard let captureDevice = AVCaptureDevice.default(.builtInWideAngleCamera,
-                                                          for: .video,
-                                                          position: .back) else {
-                                                            
-                                                            print("Error: no video devices available")
-                                                            return
+        guard let captureDevice = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .back) else {
+            print("Error: no video devices available")
+            return
         }
         
         guard let videoInput = try? AVCaptureDeviceInput(device: captureDevice) else {
