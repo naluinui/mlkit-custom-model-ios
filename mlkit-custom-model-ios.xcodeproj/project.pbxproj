@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		309D1015C6B94ED556591B59 /* Pods_mlkit_custom_model_ios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B49AB207A798BB759B9EA353 /* Pods_mlkit_custom_model_ios.framework */; };
+		AF04243222C271F100A2434D /* VideoCapture.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF04243122C271F100A2434D /* VideoCapture.swift */; };
+		AF04243422C2780B00A2434D /* CameraViewController1.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF04243322C2780B00A2434D /* CameraViewController1.swift */; };
+		AF04243622C27F9900A2434D /* Measure.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF04243522C27F9900A2434D /* Measure.swift */; };
+		AF2A532522C60785006BF555 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2A532422C60785006BF555 /* CameraViewController.swift */; };
 		AF4B751122BF63D80062680D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B751022BF63D80062680D /* AppDelegate.swift */; };
 		AF4B751322BF63D80062680D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B751222BF63D80062680D /* ViewController.swift */; };
 		AF4B751622BF63D80062680D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF4B751422BF63D80062680D /* Main.storyboard */; };
@@ -30,6 +34,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AF04243122C271F100A2434D /* VideoCapture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCapture.swift; sourceTree = "<group>"; };
+		AF04243322C2780B00A2434D /* CameraViewController1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController1.swift; sourceTree = "<group>"; };
+		AF04243522C27F9900A2434D /* Measure.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Measure.swift; sourceTree = "<group>"; };
+		AF2A532422C60785006BF555 /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		AF4B750D22BF63D80062680D /* mlkit-custom-model-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "mlkit-custom-model-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF4B751022BF63D80062680D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AF4B751222BF63D80062680D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -109,12 +117,16 @@
 			children = (
 				AF4B751022BF63D80062680D /* AppDelegate.swift */,
 				AF4B751222BF63D80062680D /* ViewController.swift */,
+				AF04243322C2780B00A2434D /* CameraViewController1.swift */,
+				AF2A532422C60785006BF555 /* CameraViewController.swift */,
 				AF4B752622BF68C70062680D /* ModelInterpreterManager.swift */,
 				AF4B752E22BF6B720062680D /* Constants.swift */,
 				ED20947622BF8F62007382E6 /* ModelOutputs+Heatmap.swift */,
-				AF4B752822BF69190062680D /* UIImage+TFLite.swift */,
 				AF4B752A22BF691E0062680D /* Data+Buffer.swift */,
+				AF4B752822BF69190062680D /* UIImage+TFLite.swift */,
 				ED20947822BFA2A6007382E6 /* JointView.swift */,
+				AF04243122C271F100A2434D /* VideoCapture.swift */,
+				AF04243522C27F9900A2434D /* Measure.swift */,
 				AF4B753022BF6B910062680D /* Resources */,
 				AF4B751422BF63D80062680D /* Main.storyboard */,
 				AF4B751722BF63DA0062680D /* Assets.xcassets */,
@@ -262,9 +274,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				AF4B752722BF68C70062680D /* ModelInterpreterManager.swift in Sources */,
+				AF04243422C2780B00A2434D /* CameraViewController1.swift in Sources */,
 				ED20947922BFA2A6007382E6 /* JointView.swift in Sources */,
+				AF2A532522C60785006BF555 /* CameraViewController.swift in Sources */,
 				ED20947722BF8F62007382E6 /* ModelOutputs+Heatmap.swift in Sources */,
+				AF04243622C27F9900A2434D /* Measure.swift in Sources */,
 				AF4B751322BF63D80062680D /* ViewController.swift in Sources */,
+				AF04243222C271F100A2434D /* VideoCapture.swift in Sources */,
 				AF4B751122BF63D80062680D /* AppDelegate.swift in Sources */,
 				AF4B752B22BF691E0062680D /* Data+Buffer.swift in Sources */,
 				AF4B752922BF69190062680D /* UIImage+TFLite.swift in Sources */,
