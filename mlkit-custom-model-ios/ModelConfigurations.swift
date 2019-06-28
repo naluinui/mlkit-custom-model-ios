@@ -41,7 +41,7 @@ public struct PoseEstimationModelConfigurations: ModelConfigurations {
     let localModelName = "cpm-model"
     let modelExtension = "tflite"
 
-    let remoteModelName: String? = "cpm-model"
+    let remoteModelName: String? = nil
 
     var dimensionBatchSize: NSNumber = 1
     var dimensionImageWidth: NSNumber = 192
@@ -60,7 +60,7 @@ public struct PoseEstimationModelConfigurations: ModelConfigurations {
     }
     
     var outputDimensions: [NSNumber] {
-        return [outputDimensionWidth, outputDimensionHeight, outputDimensionDepth]
+        return [1, outputDimensionWidth, outputDimensionHeight, outputDimensionDepth]
     }
     
 }
