@@ -15,6 +15,12 @@ class CameraViewController: UIViewController {
     private lazy var manager = ModelInterpreterManager(configuration: modelConfigurations)
     
     private var isInferencing = false
+    private var bodyPoints: [BodyPoint?] = [] {
+        didSet {
+            self.jointView?.bodyPoints = bodyPoints
+            self.tableView.reloadData()
+        }
+    }
     private var videoCapture: VideoCapture!
     
     @IBOutlet weak var videoPreview: UIView!
@@ -60,11 +66,26 @@ class CameraViewController: UIViewController {
             }
             print("output: \(String(describing: bodyPoints))")
             
-            self.jointView.bodyPoints = bodyPoints
+            self.bodyPoints = bodyPoints
             self.isInferencing = false
         }
     }
 
+}
+
+// MARK: - VideoCaptureDelegate
+extension CameraViewController: VideoCaptureDelegate {
+    
+    func videoCapture(_ capture: VideoCapture, didCaptureVideoFrame pixelBuffer: CVPixelBuffer?, timestamp: CMTime) {
+        
+        // check if the captured image from camera is contained on pixelBuffer
+        if !isInferencing, let pixelBuffer = pixelBuffer, let uiImage = UIImage(pixelBuffer: pixelBuffer) {
+            
+            // predict
+            self.detect(image: uiImage)
+        }
+        
+    }
 }
 
 // MARK: - View supporter
@@ -115,17 +136,20 @@ extension CameraViewController {
     
 }
 
-// MARK: - VideoCaptureDelegate
-extension CameraViewController: VideoCaptureDelegate {
+extension CameraViewController: UITableViewDataSource {
     
-    func videoCapture(_ capture: VideoCapture, didCaptureVideoFrame pixelBuffer: CVPixelBuffer?, timestamp: CMTime) {
-        
-        // check if the captured image from camera is contained on pixelBuffer
-        if !isInferencing, let pixelBuffer = pixelBuffer, let uiImage = UIImage(pixelBuffer: pixelBuffer) {
-            
-            // predict
-            self.detect(image: uiImage)
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return bodyPoints.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "InfoCell", for: indexPath)
+        if let bodyPoint = bodyPoints[indexPath.row] {
+            cell.textLabel?.text = bodyPoint.getLabel(index: indexPath.row)
+            let pointText: String = "\(String(format: "%.3f", bodyPoint.maxPoint.x)), \(String(format: "%.3f", bodyPoint.maxPoint.y))"
+             cell.detailTextLabel?.text = "(\(pointText)), [\(String(format: "%.3f", bodyPoint.maxConfidence))]"
         }
         
+        return cell
     }
 }

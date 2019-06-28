@@ -107,7 +107,7 @@ class JointView: UIView {
             if let n_kp = kp {
                 let x = n_kp.maxPoint.x * imageFrame.width
                 let y = n_kp.maxPoint.y * imageFrame.height
-                print("\(Constant.pointLabels[index]) \(n_kp.maxPoint.x) \(n_kp.maxPoint.y)")
+                print("\(n_kp.getLabel(index: index)) \(n_kp.maxPoint.x) \(n_kp.maxPoint.y)")
                 keypointLabelBGViews[index].center = CGPoint(x: x, y: y)
                 let cRate = (n_kp.maxConfidence - minC)/(maxC - minC)
                 keypointLabelBGViews[index].alpha = (maxAlpha - minAlpha) * CGFloat(cRate) + minAlpha
@@ -178,4 +178,12 @@ fileprivate struct Constant {
         .white,
         .gray,
     ]
+}
+
+extension BodyPoint {
+    
+    func getLabel(index: Int) -> String {
+        return Constant.pointLabels[index]
+    }
+    
 }
