@@ -11,7 +11,9 @@ import CoreMedia
 
 class CameraViewController: UIViewController {
     
-    // MARK: - AV Property
+    private lazy var modelConfigurations = PoseEstimationModelConfigurations()
+    private lazy var manager = ModelInterpreterManager(configuration: modelConfigurations)
+    
     var videoCapture: VideoCapture!
     
     @IBOutlet weak var videoPreview: UIView!
@@ -23,6 +25,27 @@ class CameraViewController: UIViewController {
         super.viewDidLoad()
         setupView()
         setUpCamera()
+    }
+    
+    func detect(image: UIImage) {
+        
+        // Load model
+        
+        if !manager.loadModel() {
+            updateStatus(with: "Failed to load the model.")
+        } else {
+            updateStatus(with: "Model loaded")
+        }
+        
+        // Convert imge to data
+        
+        let size = CGSize(width: modelConfigurations.dimensionImageWidth.intValue, height: modelConfigurations.dimensionImageHeight.intValue)
+        let data = image.scaledData(with: size, byteCount: Int(size.width) * Int(size.height) * modelConfigurations.dimensionComponents.intValue * modelConfigurations.dimensionBatchSize.intValue, isQuantized: modelConfigurations.elementType == .uInt8)
+        
+        // TODO: detect pose
+        manager.detect(in: data) { (bodyPoint, error) in
+            
+        }
     }
 
 }

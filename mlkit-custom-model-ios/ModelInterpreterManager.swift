@@ -2,132 +2,83 @@
 //  ModelInterpreterManager.swift
 //  mlkit-custom-model-ios
 //
-//  Created by Somjintana Korbut on 23/6/2562 BE.
+//  Created by Somjintana Korbut on 28/6/2562 BE.
 //  Copyright © 2562 Nui.swift. All rights reserved.
 //
 
-import UIKit
+import Foundation
 import FirebaseMLCommon
 import FirebaseMLModelInterpreter
 
-public enum ModelInterpreterError: Error {
-    case invalidImageData
-    case invalidResults
-    case invalidModelDataType
-}
-
-public class ModelInterpreterManager {
+class ModelInterpreterManager {
     
     public typealias DetectPoseCompletion = ([BodyPoint?]?, Error?) -> Void
     
+    public var modelConfigurations: ModelConfigurations!
+    
+    private var modelOptions: ModelOptions!
     private let modelInputOutputOptions = ModelInputOutputOptions()
-    private var remoteModelOptions: ModelOptions?
-    private var localModelOptions: ModelOptions?
     private var modelInterpreter: ModelInterpreter?
-    private var modelElementType: ModelElementType = .float32
     
-    public func setUpRemoteModel(name: String) -> Bool {
-        let initialConditions = ModelDownloadConditions(
-            allowsCellularAccess: true,
-            allowsBackgroundDownloading: true
-        )
-        let updateConditions = ModelDownloadConditions(
-            allowsCellularAccess: false,
-            allowsBackgroundDownloading: true
-        )
-        let remoteModel = RemoteModel(
-            name: name,
-            allowsModelUpdates: true,
-            initialConditions: initialConditions,
-            updateConditions: updateConditions
-        )
+    init(configuration: ModelConfigurations) {
+        self.modelConfigurations = configuration
+        setupModel()
+    }
+    
+    // MARK: Set up model
+    
+    func setupModel() {
         
-        ModelManager.modelManager().register(remoteModel)
+        var remoteModel: RemoteModel? = nil
+        var localModel: LocalModel? = nil
         
-        remoteModelOptions = ModelOptions(remoteModelName: name, localModelName: nil)
-        return true
-    }
-    
-    public func setUpLocalModel(name: String, filename: String, type: String, bundle: Bundle = .main) -> Bool {
-        guard let localModelFilePath = bundle.path(
-            forResource: filename,
-            ofType: type)
-            else {
-                print("Failed to get the local model file path.")
-                return false
+        // Setup remote model
+        
+        if let remoteModelName = modelConfigurations.remoteModelName {
+            
+            let initialConditions = ModelDownloadConditions(
+                allowsCellularAccess: true,
+                allowsBackgroundDownloading: true
+            )
+            let updateConditions = ModelDownloadConditions(
+                allowsCellularAccess: false,
+                allowsBackgroundDownloading: true
+            )
+            remoteModel = RemoteModel(
+                name: remoteModelName,
+                allowsModelUpdates: true,
+                initialConditions: initialConditions,
+                updateConditions: updateConditions
+            )
+            
+            ModelManager.modelManager().register(remoteModel!)
         }
-        let localModel = LocalModel(name: name, path: localModelFilePath)
-        ModelManager.modelManager().register(localModel)
-        localModelOptions = ModelOptions(remoteModelName: nil, localModelName: name)
-        return true
-    }
-    
-    public func loadRemoteModel(
-        isQuantizedModel: Bool,
-        inputOutputIndex: UInt,
-        inputDimensions: [NSNumber],
-        outputDimensions: [NSNumber]
-        ) -> Bool {
-        guard let remoteModelOptions = remoteModelOptions else {
-            print("Failed to load the remote model because the options are nil.")
-            return false
+        
+        // Setup local model
+        
+        if let localModelFilePath = Bundle.main.path(forResource: modelConfigurations.localModelName, ofType: modelConfigurations.modelExtension) {
+            localModel = LocalModel(name: modelConfigurations.localModelName, path: localModelFilePath)
+            ModelManager.modelManager().register(localModel!)
         }
-        return loadModel(
-            options: remoteModelOptions,
-            isQuantizedModel: isQuantizedModel,
-            inputOutputIndex: inputOutputIndex,
-            inputDimensions: inputDimensions,
-            outputDimensions: outputDimensions
-        )
+        
+        modelOptions = ModelOptions(remoteModelName: remoteModel?.name, localModelName: localModel?.name)
+        
     }
     
-    public func loadLocalModel(
-        isQuantizedModel: Bool,
-        inputOutputIndex: UInt,
-        inputDimensions: [NSNumber],
-        outputDimensions: [NSNumber]
-        ) -> Bool {
-        guard let localModelOptions = localModelOptions else {
-            print("Failed to load the local model because the options are nil.")
-            return false
-        }
-        return loadModel(
-            options: localModelOptions,
-            isQuantizedModel: isQuantizedModel,
-            inputOutputIndex: inputOutputIndex,
-            inputDimensions: inputDimensions,
-            outputDimensions: outputDimensions
-        )
-    }
+    // MARK: Load model
     
-    func loadModel(
-        options: ModelOptions,
-        isQuantizedModel: Bool,
-        inputOutputIndex: UInt,
-        inputDimensions: [NSNumber],
-        outputDimensions: [NSNumber],
-        bundle: Bundle = .main
-        ) -> Bool {
+    func loadModel() -> Bool {
         do {
-//            guard let labelsPath = bundle.path(
-//                forResource: "labels",
-//                ofType: "txt")
-//                else {
-//                    print("Failed to get the labels file path.")
-//                    return false
-//            }
-//            let contents = try String(contentsOfFile: labelsPath, encoding: .utf8)
-//            labels = contents.components(separatedBy: CharacterSet.newlines)
-            modelInterpreter = ModelInterpreter.modelInterpreter(options: options)
+            modelInterpreter = ModelInterpreter.modelInterpreter(options: modelOptions)
             try modelInputOutputOptions.setInputFormat(
-                index: inputOutputIndex,
-                type: ModelElementType.float32,
-                dimensions: inputDimensions
+                index: modelConfigurations!.inputOutputIndex,
+                type: modelConfigurations!.elementType,
+                dimensions: modelConfigurations!.inputDimensions
             )
             try modelInputOutputOptions.setOutputFormat(
-                index: inputOutputIndex,
-                type: ModelElementType.float32,
-                dimensions: outputDimensions
+                index: modelConfigurations!.inputOutputIndex,
+                type: modelConfigurations!.elementType,
+                dimensions: modelConfigurations!.outputDimensions
             )
         } catch let error {
             print("Failed to load the model with error: \(error.localizedDescription)")
@@ -136,7 +87,10 @@ public class ModelInterpreterManager {
         return true
     }
     
-    public func detectObjects(in imageData: Data?, completion: @escaping DetectPoseCompletion) {
+    // MARK: Detect & Process output
+    
+    func detect(in imageData: Data?, completion: @escaping DetectPoseCompletion) {
+        
         guard let imageData = imageData else {
             safeDispatchOnMain {
                 completion(nil, ModelInterpreterError.invalidImageData)
@@ -162,7 +116,7 @@ public class ModelInterpreterManager {
         }
     }
     
-    private func process(_ outputs: ModelOutputs, completion: @escaping DetectPoseCompletion) {
+    func process(_ outputs: ModelOutputs, completion: @escaping DetectPoseCompletion) {
         
         let bodyPoints = outputs.toBodyPoints()
         
@@ -172,42 +126,15 @@ public class ModelInterpreterManager {
         }
         
         completion(bodyPoints, nil)
+        
     }
-    
-    public func scaledImageData(
-        from image: UIImage,
-        with size: CGSize,
-        componentCount: Int,
-        elementType: ModelElementType,
-        batchSize: Int
-        ) -> Data? {
-        guard let scaledImageData = image.scaledData(
-            with: size,
-            byteCount: Int(size.width) * Int(size.height) * componentCount * batchSize,
-            isQuantized: (elementType == .uInt8))
-            else {
-                print("Failed to get scaled image data with size: \(size).")
-                return nil
-        }
-        return scaledImageData
-    }
+
 }
 
-// MARK: - Internal
-
-/// Default quantization parameters for Softmax. The Softmax function is normally implemented as the
-/// final layer, just before the output layer, of a neural-network based classifier.
-///
-/// Quantized values can be mapped to float values using the following conversion:
-///   `realValue = scale * (quantizedValue - zeroPoint)`.
-enum Softmax {
-    static let zeroPoint: Int = 0
-    static var scale: Float { return Float(1.0 / (maxUInt8QuantizedValue + normalizerValue)) }
-    
-    // MARK: - Private
-    
-    private static let maxUInt8QuantizedValue = 255.0
-    private static let normalizerValue = 1.0
+public enum ModelInterpreterError: Error {
+    case invalidImageData
+    case invalidResults
+    case invalidModelDataType
 }
 
 // MARK: - Fileprivate
