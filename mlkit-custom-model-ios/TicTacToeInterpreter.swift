@@ -4,8 +4,10 @@ import FirebaseMLModelInterpreter
 
 class TicTacToeInterpreter {
     
-    var interpreter: ModelInterpreter?
-    let inputOutputOptions = ModelInputOutputOptions()
+    var isRemoteModel = false
+    
+    private var interpreter: ModelInterpreter?
+    private let inputOutputOptions = ModelInputOutputOptions()
     
     func prepare() {
         guard interpreter == nil else { return }
@@ -26,6 +28,7 @@ class TicTacToeInterpreter {
         // create a model interpreter
         if ModelManager.modelManager().isModelDownloaded(remoteModel) {
           interpreter = ModelInterpreter.modelInterpreter(remoteModel: remoteModel)
+          isRemoteModel = true
         } else {
           interpreter = ModelInterpreter.modelInterpreter(localModel: localModel)
         }

@@ -4,6 +4,8 @@ class TicTacToeViewController: UIViewController {
     
     @IBOutlet var buttons: [UIButton]!
     @IBOutlet var nextMoveButton: UIButton!
+    @IBOutlet var localModelLabel: UILabel!
+    @IBOutlet var remoteModelLabel: UILabel!
     
     var boardState: [[Mark]] = [[.empty, .empty, .empty],
                                 [.empty, .empty, .empty],
@@ -15,7 +17,13 @@ class TicTacToeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        localModelLabel.layer.cornerRadius = 22
+        remoteModelLabel.layer.cornerRadius = 22
+        
         interpreter.prepare()
+        
+        localModelLabel.isHidden = interpreter.isRemoteModel
+        remoteModelLabel.isHidden = !interpreter.isRemoteModel
 
         for i in 0..<buttons.count {
             let state = boardState[i/3][i%3]
@@ -65,9 +73,13 @@ class TicTacToeViewController: UIViewController {
     
     func updateButtons(bestMoves: [[Float]]) {
         let heatmap = bestMoves.map { row in row.map { $0.color } }
-        for i in 0..<buttons.count {
-            buttons[i].backgroundColor = heatmap[i/3][i%3]
-            buttons[i].setTitle(String(format: "%.2f", bestMoves[i/3][i%3]), for: .normal)
+        for button in buttons {
+            let i = button.tag - 1
+            let x = i % 3
+            let y = i / 3
+            let isEmpty = boardState[y][x] == .empty
+            button.backgroundColor = isEmpty ? heatmap[y][x] : .white
+            button.setTitle(isEmpty ? String(format: "%.2f", bestMoves[y][x]) : "", for: .normal)
         }
     }
 }

@@ -307,9 +307,32 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="REMOTE MODEL" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lPk-l3-IMM">
+                                <rect key="frame" x="142" y="132" width="130" height="24"/>
+                                <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="24" id="MOD-qB-xqG"/>
+                                    <constraint firstAttribute="width" constant="130" id="kdh-Gk-Wbe"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LOCAL MODEL" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dFx-tl-nmI">
+                                <rect key="frame" x="152" y="132" width="110" height="24"/>
+                                <color key="backgroundColor" systemColor="systemYellowColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="24" id="IGa-s4-htg"/>
+                                    <constraint firstAttribute="width" constant="110" id="XaT-Wp-jRj"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="lPk-l3-IMM" firstAttribute="top" secondItem="RVG-U1-QRP" secondAttribute="top" constant="44" id="0at-tx-NaB"/>
                             <constraint firstItem="9Eg-pk-txq" firstAttribute="width" secondItem="9Eg-pk-txq" secondAttribute="height" multiplier="1:1" id="0av-PD-aDv"/>
                             <constraint firstItem="HEG-cB-GTN" firstAttribute="centerX" secondItem="s1r-e2-lMV" secondAttribute="centerX" id="0gs-Nd-X9g"/>
                             <constraint firstItem="dhb-i4-PZb" firstAttribute="bottom" secondItem="lm6-F2-FoO" secondAttribute="bottom" id="1Aq-gW-9ma"/>
@@ -330,9 +353,12 @@
                             <constraint firstItem="gx7-ea-nH9" firstAttribute="leading" secondItem="biw-2w-NEq" secondAttribute="trailing" constant="8" id="PGo-al-gwT"/>
                             <constraint firstItem="dhb-i4-PZb" firstAttribute="centerX" secondItem="tqZ-uc-1nB" secondAttribute="centerX" id="Pu1-G3-4cF"/>
                             <constraint firstItem="MGH-bi-g4z" firstAttribute="top" secondItem="biw-2w-NEq" secondAttribute="bottom" constant="3" id="Qh6-Is-uyX"/>
+                            <constraint firstItem="lPk-l3-IMM" firstAttribute="centerX" secondItem="zwb-lo-3xS" secondAttribute="centerX" id="Saw-wl-NL9"/>
                             <constraint firstItem="UfN-0z-kKl" firstAttribute="centerY" secondItem="2bW-cz-pf6" secondAttribute="centerY" id="UN9-x7-rm4"/>
                             <constraint firstItem="biw-2w-NEq" firstAttribute="centerY" secondItem="zwb-lo-3xS" secondAttribute="centerY" id="UcB-E9-KHC"/>
+                            <constraint firstItem="dFx-tl-nmI" firstAttribute="centerX" secondItem="zwb-lo-3xS" secondAttribute="centerX" id="Wg6-jU-n8A"/>
                             <constraint firstItem="HEG-cB-GTN" firstAttribute="centerY" secondItem="2pw-4i-J1b" secondAttribute="centerY" id="XEQ-xb-LEX"/>
+                            <constraint firstItem="dFx-tl-nmI" firstAttribute="top" secondItem="RVG-U1-QRP" secondAttribute="top" constant="44" id="XKA-zp-R4r"/>
                             <constraint firstItem="biw-2w-NEq" firstAttribute="top" secondItem="tqZ-uc-1nB" secondAttribute="bottom" constant="8" id="ZNM-rg-JR1"/>
                             <constraint firstItem="biw-2w-NEq" firstAttribute="leading" secondItem="lm6-F2-FoO" secondAttribute="trailing" constant="3" id="aaD-68-N2b"/>
                             <constraint firstItem="XGX-RK-iFs" firstAttribute="leading" secondItem="tqZ-uc-1nB" secondAttribute="trailing" constant="8" id="bZG-NX-iyK"/>
@@ -354,7 +380,9 @@
                     </view>
                     <navigationItem key="navigationItem" title="Tic Tac Toe" id="Xxs-gr-Rei"/>
                     <connections>
+                        <outlet property="localModelLabel" destination="dFx-tl-nmI" id="SPI-f5-chc"/>
                         <outlet property="nextMoveButton" destination="HEG-cB-GTN" id="Oak-Ar-GSs"/>
+                        <outlet property="remoteModelLabel" destination="lPk-l3-IMM" id="8hb-rv-IkO"/>
                         <outletCollection property="buttons" destination="8dX-dG-yjR" collectionClass="NSMutableArray" id="OKa-7w-ajH"/>
                         <outletCollection property="buttons" destination="tqZ-uc-1nB" collectionClass="NSMutableArray" id="sni-dW-yhK"/>
                         <outletCollection property="buttons" destination="XGX-RK-iFs" collectionClass="NSMutableArray" id="bhS-tz-tCt"/>
@@ -368,7 +396,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VsW-zH-whs" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="145" y="1031"/>
+            <point key="canvasLocation" x="144.92753623188406" y="1030.5803571428571"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="xJA-jw-pjc">

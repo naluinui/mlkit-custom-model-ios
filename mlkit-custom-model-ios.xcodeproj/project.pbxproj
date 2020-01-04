@@ -13,12 +13,9 @@
 		AF4B751822BF63DA0062680D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AF4B751722BF63DA0062680D /* Assets.xcassets */; };
 		AF4B751B22BF63DA0062680D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF4B751922BF63DA0062680D /* LaunchScreen.storyboard */; };
 		AF4B752322BF65A10062680D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AF4B752222BF65A10062680D /* GoogleService-Info.plist */; };
-		AF4B753B22BF70730062680D /* hourglass-model.tflite in Resources */ = {isa = PBXBuildFile; fileRef = AF4B753922BF6D350062680D /* hourglass-model.tflite */; };
-		AF4B753C22BF70740062680D /* cpm-model.tflite in Resources */ = {isa = PBXBuildFile; fileRef = AF4B753A22BF6D380062680D /* cpm-model.tflite */; };
-		AF7255AA23C0953300E92686 /* tictactoe.tflite in Resources */ = {isa = PBXBuildFile; fileRef = AF7255A923C0953300E92686 /* tictactoe.tflite */; };
+		AF7255AC23C0DF2200E92686 /* tictactoe.tflite in Resources */ = {isa = PBXBuildFile; fileRef = AF7255AB23C0DF2200E92686 /* tictactoe.tflite */; };
 		ED2DD79223A94990005BAD59 /* sum.tflite in Resources */ = {isa = PBXBuildFile; fileRef = ED2DD79123A94990005BAD59 /* sum.tflite */; };
 		ED2DD79423A94AB6005BAD59 /* SumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2DD79323A94AB6005BAD59 /* SumViewController.swift */; };
-		ED7A318C22C27FB90015A138 /* deeplabv3_257_mv_gpu.tflite in Resources */ = {isa = PBXBuildFile; fileRef = ED7A318B22C27FB90015A138 /* deeplabv3_257_mv_gpu.tflite */; };
 		EDB9FFA823AE09580015F557 /* SumInterpreter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCBAE2E23A9E3830063E1CB /* SumInterpreter.swift */; };
 		EDB9FFAA23AE0F690015F557 /* TicTacToeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB9FFA923AE0F690015F557 /* TicTacToeViewController.swift */; };
 		EDB9FFAC23AE10250015F557 /* TicTacToeInterpreter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB9FFAB23AE10250015F557 /* TicTacToeInterpreter.swift */; };
@@ -35,12 +32,9 @@
 		AF4B751A22BF63DA0062680D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AF4B751C22BF63DA0062680D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AF4B752222BF65A10062680D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		AF4B753922BF6D350062680D /* hourglass-model.tflite */ = {isa = PBXFileReference; lastKnownFileType = file; path = "hourglass-model.tflite"; sourceTree = "<group>"; };
-		AF4B753A22BF6D380062680D /* cpm-model.tflite */ = {isa = PBXFileReference; lastKnownFileType = file; path = "cpm-model.tflite"; sourceTree = "<group>"; };
-		AF7255A923C0953300E92686 /* tictactoe.tflite */ = {isa = PBXFileReference; lastKnownFileType = file; path = tictactoe.tflite; sourceTree = "<group>"; };
+		AF7255AB23C0DF2200E92686 /* tictactoe.tflite */ = {isa = PBXFileReference; lastKnownFileType = file; path = tictactoe.tflite; sourceTree = "<group>"; };
 		ED2DD79123A94990005BAD59 /* sum.tflite */ = {isa = PBXFileReference; lastKnownFileType = file; path = sum.tflite; sourceTree = "<group>"; };
 		ED2DD79323A94AB6005BAD59 /* SumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SumViewController.swift; sourceTree = "<group>"; };
-		ED7A318B22C27FB90015A138 /* deeplabv3_257_mv_gpu.tflite */ = {isa = PBXFileReference; lastKnownFileType = file; path = deeplabv3_257_mv_gpu.tflite; sourceTree = "<group>"; };
 		EDB9FFA923AE0F690015F557 /* TicTacToeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicTacToeViewController.swift; sourceTree = "<group>"; };
 		EDB9FFAB23AE10250015F557 /* TicTacToeInterpreter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicTacToeInterpreter.swift; sourceTree = "<group>"; };
 		EDCBAE2E23A9E3830063E1CB /* SumInterpreter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SumInterpreter.swift; sourceTree = "<group>"; };
@@ -115,10 +109,7 @@
 			isa = PBXGroup;
 			children = (
 				ED2DD79123A94990005BAD59 /* sum.tflite */,
-				AF7255A923C0953300E92686 /* tictactoe.tflite */,
-				ED7A318B22C27FB90015A138 /* deeplabv3_257_mv_gpu.tflite */,
-				AF4B753922BF6D350062680D /* hourglass-model.tflite */,
-				AF4B753A22BF6D380062680D /* cpm-model.tflite */,
+				AF7255AB23C0DF2200E92686 /* tictactoe.tflite */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -184,14 +175,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				ED2DD79223A94990005BAD59 /* sum.tflite in Resources */,
-				AF7255AA23C0953300E92686 /* tictactoe.tflite in Resources */,
 				AF4B752322BF65A10062680D /* GoogleService-Info.plist in Resources */,
-				ED7A318C22C27FB90015A138 /* deeplabv3_257_mv_gpu.tflite in Resources */,
+				AF7255AC23C0DF2200E92686 /* tictactoe.tflite in Resources */,
 				AF4B751B22BF63DA0062680D /* LaunchScreen.storyboard in Resources */,
 				AF4B751822BF63DA0062680D /* Assets.xcassets in Resources */,
-				AF4B753B22BF70730062680D /* hourglass-model.tflite in Resources */,
 				AF4B751622BF63D80062680D /* Main.storyboard in Resources */,
-				AF4B753C22BF70740062680D /* cpm-model.tflite in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
