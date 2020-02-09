@@ -19,6 +19,13 @@
 		EDB9FFA823AE09580015F557 /* SumInterpreter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCBAE2E23A9E3830063E1CB /* SumInterpreter.swift */; };
 		EDB9FFAA23AE0F690015F557 /* TicTacToeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB9FFA923AE0F690015F557 /* TicTacToeViewController.swift */; };
 		EDB9FFAC23AE10250015F557 /* TicTacToeInterpreter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB9FFAB23AE10250015F557 /* TicTacToeInterpreter.swift */; };
+		EDD3BFC523F03EAA00C9ED1D /* yamnet.tflite in Resources */ = {isa = PBXBuildFile; fileRef = EDD3BFC423F03EAA00C9ED1D /* yamnet.tflite */; };
+		EDD3BFC723F03ECC00C9ED1D /* YamnetInterpreter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD3BFC623F03ECC00C9ED1D /* YamnetInterpreter.swift */; };
+		EDD3BFC923F03EFF00C9ED1D /* AudioViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD3BFC823F03EFF00C9ED1D /* AudioViewController.swift */; };
+		EDD3BFCB23F0492400C9ED1D /* dog_975ms.wav in Resources */ = {isa = PBXBuildFile; fileRef = EDD3BFCA23F0492400C9ED1D /* dog_975ms.wav */; };
+		EDD3BFCD23F04F3300C9ED1D /* yamnet_class_map.csv in Resources */ = {isa = PBXBuildFile; fileRef = EDD3BFCC23F04F3300C9ED1D /* yamnet_class_map.csv */; };
+		EDD3BFD223F0574A00C9ED1D /* AudioEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD3BFD123F0574A00C9ED1D /* AudioEngine.swift */; };
+		EDD3BFD623F076C100C9ED1D /* Labels.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD3BFD523F076C100C9ED1D /* Labels.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +45,13 @@
 		EDB9FFA923AE0F690015F557 /* TicTacToeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicTacToeViewController.swift; sourceTree = "<group>"; };
 		EDB9FFAB23AE10250015F557 /* TicTacToeInterpreter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicTacToeInterpreter.swift; sourceTree = "<group>"; };
 		EDCBAE2E23A9E3830063E1CB /* SumInterpreter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SumInterpreter.swift; sourceTree = "<group>"; };
+		EDD3BFC423F03EAA00C9ED1D /* yamnet.tflite */ = {isa = PBXFileReference; lastKnownFileType = file; path = yamnet.tflite; sourceTree = "<group>"; };
+		EDD3BFC623F03ECC00C9ED1D /* YamnetInterpreter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YamnetInterpreter.swift; sourceTree = "<group>"; };
+		EDD3BFC823F03EFF00C9ED1D /* AudioViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioViewController.swift; sourceTree = "<group>"; };
+		EDD3BFCA23F0492400C9ED1D /* dog_975ms.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = dog_975ms.wav; sourceTree = "<group>"; };
+		EDD3BFCC23F04F3300C9ED1D /* yamnet_class_map.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = yamnet_class_map.csv; sourceTree = "<group>"; };
+		EDD3BFD123F0574A00C9ED1D /* AudioEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioEngine.swift; sourceTree = "<group>"; };
+		EDD3BFD523F076C100C9ED1D /* Labels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Labels.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +109,8 @@
 				EDCBAE2E23A9E3830063E1CB /* SumInterpreter.swift */,
 				EDB9FFA923AE0F690015F557 /* TicTacToeViewController.swift */,
 				EDB9FFAB23AE10250015F557 /* TicTacToeInterpreter.swift */,
+				EDD3BFC823F03EFF00C9ED1D /* AudioViewController.swift */,
+				EDD3BFCE23F052B200C9ED1D /* Audio */,
 				AF4B751422BF63D80062680D /* Main.storyboard */,
 				AF4B753022BF6B910062680D /* Resources */,
 				AF4B751722BF63DA0062680D /* Assets.xcassets */,
@@ -108,10 +124,23 @@
 		AF4B753022BF6B910062680D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				EDD3BFCA23F0492400C9ED1D /* dog_975ms.wav */,
 				ED2DD79123A94990005BAD59 /* sum.tflite */,
 				AF7255AB23C0DF2200E92686 /* tictactoe.tflite */,
+				EDD3BFC423F03EAA00C9ED1D /* yamnet.tflite */,
+				EDD3BFCC23F04F3300C9ED1D /* yamnet_class_map.csv */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		EDD3BFCE23F052B200C9ED1D /* Audio */ = {
+			isa = PBXGroup;
+			children = (
+				EDD3BFD123F0574A00C9ED1D /* AudioEngine.swift */,
+				EDD3BFD523F076C100C9ED1D /* Labels.swift */,
+				EDD3BFC623F03ECC00C9ED1D /* YamnetInterpreter.swift */,
+			);
+			path = Audio;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -174,11 +203,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EDD3BFCD23F04F3300C9ED1D /* yamnet_class_map.csv in Resources */,
 				ED2DD79223A94990005BAD59 /* sum.tflite in Resources */,
+				EDD3BFC523F03EAA00C9ED1D /* yamnet.tflite in Resources */,
 				AF4B752322BF65A10062680D /* GoogleService-Info.plist in Resources */,
 				AF7255AC23C0DF2200E92686 /* tictactoe.tflite in Resources */,
 				AF4B751B22BF63DA0062680D /* LaunchScreen.storyboard in Resources */,
 				AF4B751822BF63DA0062680D /* Assets.xcassets in Resources */,
+				EDD3BFCB23F0492400C9ED1D /* dog_975ms.wav in Resources */,
 				AF4B751622BF63D80062680D /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -232,11 +264,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EDD3BFD223F0574A00C9ED1D /* AudioEngine.swift in Sources */,
 				ED2DD79423A94AB6005BAD59 /* SumViewController.swift in Sources */,
 				AF4B751122BF63D80062680D /* AppDelegate.swift in Sources */,
+				EDD3BFC723F03ECC00C9ED1D /* YamnetInterpreter.swift in Sources */,
 				EDB9FFAC23AE10250015F557 /* TicTacToeInterpreter.swift in Sources */,
 				EDB9FFAA23AE0F690015F557 /* TicTacToeViewController.swift in Sources */,
+				EDD3BFC923F03EFF00C9ED1D /* AudioViewController.swift in Sources */,
 				EDB9FFA823AE09580015F557 /* SumInterpreter.swift in Sources */,
+				EDD3BFD623F076C100C9ED1D /* Labels.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

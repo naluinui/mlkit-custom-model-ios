@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="hKq-Ks-h2S">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="hKq-Ks-h2S">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -57,6 +57,26 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <segue destination="ctX-ic-PAD" kind="show" id="Crn-ND-KDK"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="CIK-rM-8u8" style="IBUITableViewCellStyleDefault" id="M53-XT-7Gb">
+                                        <rect key="frame" x="0.0" y="115" width="414" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="M53-XT-7Gb" id="Xly-J9-dXU">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Audio detection (Yamnet)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="CIK-rM-8u8">
+                                                    <rect key="frame" x="20" y="0.0" width="374" height="43.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="oxL-U3-6Id" kind="show" id="Yti-HF-cWV"/>
                                         </connections>
                                     </tableViewCell>
                                 </cells>
@@ -142,6 +162,57 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aC2-Z5-9VO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="146" y="356"/>
+        </scene>
+        <!--Audio detection-->
+        <scene sceneID="vZP-qN-7Ys">
+            <objects>
+                <viewController id="oxL-U3-6Id" customClass="AudioViewController" customModule="mlkit_custom_model_ios" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="csQ-vK-VLa">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qyW-tb-xxb">
+                                <rect key="frame" x="20" y="435.5" width="374" height="25.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kga-Dt-K8p">
+                                <rect key="frame" x="160" y="469" width="94" height="30"/>
+                                <state key="normal" title="Test dog bark"/>
+                                <connections>
+                                    <action selector="buttonPressed" destination="oxL-U3-6Id" eventType="touchUpInside" id="Gpf-6C-g00"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AC3-7n-zyD">
+                                <rect key="frame" x="150.5" y="507" width="113" height="30"/>
+                                <state key="normal" title="Use Microphone"/>
+                                <connections>
+                                    <action selector="microphonePressed" destination="oxL-U3-6Id" eventType="touchUpInside" id="J0b-ew-AFx"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="kga-Dt-K8p" firstAttribute="top" secondItem="qyW-tb-xxb" secondAttribute="bottom" constant="8" id="O6P-LC-2nF"/>
+                            <constraint firstItem="AC3-7n-zyD" firstAttribute="top" secondItem="kga-Dt-K8p" secondAttribute="bottom" constant="8" id="OQN-ac-zyj"/>
+                            <constraint firstItem="qyW-tb-xxb" firstAttribute="leading" secondItem="KzO-SZ-g1g" secondAttribute="leading" constant="20" id="WzY-Tk-L0m"/>
+                            <constraint firstItem="qyW-tb-xxb" firstAttribute="centerY" secondItem="csQ-vK-VLa" secondAttribute="centerY" id="t3k-WM-tSB"/>
+                            <constraint firstItem="KzO-SZ-g1g" firstAttribute="trailing" secondItem="qyW-tb-xxb" secondAttribute="trailing" constant="20" id="yHy-AR-cQz"/>
+                            <constraint firstItem="AC3-7n-zyD" firstAttribute="centerX" secondItem="csQ-vK-VLa" secondAttribute="centerX" id="yRL-fg-5Tb"/>
+                            <constraint firstItem="kga-Dt-K8p" firstAttribute="centerX" secondItem="csQ-vK-VLa" secondAttribute="centerX" id="zdf-3s-YwN"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="KzO-SZ-g1g"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Audio detection" id="eqa-2O-0IG"/>
+                    <connections>
+                        <outlet property="microphoneButton" destination="AC3-7n-zyD" id="zSG-3d-4sq"/>
+                        <outlet property="outputLabel" destination="qyW-tb-xxb" id="Oaq-7H-9GX"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2sD-cB-mC4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-746.37681159420299" y="1275.6696428571429"/>
         </scene>
         <!--Tic Tac Toe-->
         <scene sceneID="7dS-MR-PNS">
