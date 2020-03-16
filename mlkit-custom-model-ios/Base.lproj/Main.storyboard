@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="hKq-Ks-h2S">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="hKq-Ks-h2S">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -171,43 +171,88 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qyW-tb-xxb">
-                                <rect key="frame" x="20" y="435.5" width="374" height="25.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Microphone" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qyW-tb-xxb">
+                                <rect key="frame" x="20" y="826" width="81.5" height="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kga-Dt-K8p">
-                                <rect key="frame" x="160" y="469" width="94" height="30"/>
+                                <rect key="frame" x="200" y="820" width="94" height="30"/>
                                 <state key="normal" title="Test dog bark"/>
                                 <connections>
                                     <action selector="buttonPressed" destination="oxL-U3-6Id" eventType="touchUpInside" id="Gpf-6C-g00"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AC3-7n-zyD">
-                                <rect key="frame" x="150.5" y="507" width="113" height="30"/>
-                                <state key="normal" title="Use Microphone"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rAJ-jv-SZb">
+                                <rect key="frame" x="336" y="820" width="58" height="30"/>
+                                <state key="normal" title="Save file"/>
                                 <connections>
-                                    <action selector="microphonePressed" destination="oxL-U3-6Id" eventType="touchUpInside" id="J0b-ew-AFx"/>
+                                    <action selector="savePressed" destination="oxL-U3-6Id" eventType="touchUpInside" id="cSm-C8-gby"/>
                                 </connections>
                             </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="8D6-nW-RCC">
+                                <rect key="frame" x="0.0" y="111" width="414" height="690"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" textLabel="7Pp-J2-mFZ" detailTextLabel="iXq-hx-w06" style="IBUITableViewCellStyleValue1" id="ORl-TA-n1e">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ORl-TA-n1e" id="DyW-J9-Ihi">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="7Pp-J2-mFZ">
+                                                    <rect key="frame" x="20" y="12" width="33.5" height="20.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="iXq-hx-w06">
+                                                    <rect key="frame" x="350" y="12" width="44" height="20.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="oxL-U3-6Id" id="XD0-In-o3j"/>
+                                    <outlet property="delegate" destination="oxL-U3-6Id" id="iqJ-8I-EaG"/>
+                                </connections>
+                            </tableView>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="cO0-zL-Zef">
+                                <rect key="frame" x="109" y="819.5" width="51" height="31"/>
+                                <connections>
+                                    <action selector="microphoneToggled" destination="oxL-U3-6Id" eventType="valueChanged" id="cVT-V2-diP"/>
+                                </connections>
+                            </switch>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="kga-Dt-K8p" firstAttribute="top" secondItem="qyW-tb-xxb" secondAttribute="bottom" constant="8" id="O6P-LC-2nF"/>
-                            <constraint firstItem="AC3-7n-zyD" firstAttribute="top" secondItem="kga-Dt-K8p" secondAttribute="bottom" constant="8" id="OQN-ac-zyj"/>
+                            <constraint firstItem="rAJ-jv-SZb" firstAttribute="leading" secondItem="kga-Dt-K8p" secondAttribute="trailing" constant="42" id="5Mw-z5-xBz"/>
+                            <constraint firstItem="cO0-zL-Zef" firstAttribute="centerY" secondItem="qyW-tb-xxb" secondAttribute="centerY" id="7d9-Wi-QSW"/>
+                            <constraint firstItem="kga-Dt-K8p" firstAttribute="firstBaseline" secondItem="qyW-tb-xxb" secondAttribute="firstBaseline" id="JuJ-gB-e1f"/>
+                            <constraint firstItem="KzO-SZ-g1g" firstAttribute="trailing" secondItem="8D6-nW-RCC" secondAttribute="trailing" id="PTq-sc-8MC"/>
+                            <constraint firstItem="cO0-zL-Zef" firstAttribute="top" secondItem="8D6-nW-RCC" secondAttribute="bottom" constant="18.5" id="SR7-cl-IOG"/>
+                            <constraint firstItem="KzO-SZ-g1g" firstAttribute="bottom" secondItem="rAJ-jv-SZb" secondAttribute="bottom" constant="12" id="VHa-Ha-umR"/>
                             <constraint firstItem="qyW-tb-xxb" firstAttribute="leading" secondItem="KzO-SZ-g1g" secondAttribute="leading" constant="20" id="WzY-Tk-L0m"/>
-                            <constraint firstItem="qyW-tb-xxb" firstAttribute="centerY" secondItem="csQ-vK-VLa" secondAttribute="centerY" id="t3k-WM-tSB"/>
-                            <constraint firstItem="KzO-SZ-g1g" firstAttribute="trailing" secondItem="qyW-tb-xxb" secondAttribute="trailing" constant="20" id="yHy-AR-cQz"/>
-                            <constraint firstItem="AC3-7n-zyD" firstAttribute="centerX" secondItem="csQ-vK-VLa" secondAttribute="centerX" id="yRL-fg-5Tb"/>
-                            <constraint firstItem="kga-Dt-K8p" firstAttribute="centerX" secondItem="csQ-vK-VLa" secondAttribute="centerX" id="zdf-3s-YwN"/>
+                            <constraint firstItem="cO0-zL-Zef" firstAttribute="leading" secondItem="qyW-tb-xxb" secondAttribute="trailing" constant="7.5" id="abL-JI-szu"/>
+                            <constraint firstItem="KzO-SZ-g1g" firstAttribute="trailing" secondItem="rAJ-jv-SZb" secondAttribute="trailing" constant="20" id="ldS-Gb-Xvt"/>
+                            <constraint firstItem="8D6-nW-RCC" firstAttribute="leading" secondItem="KzO-SZ-g1g" secondAttribute="leading" id="o3A-D6-e0v"/>
+                            <constraint firstItem="8D6-nW-RCC" firstAttribute="top" secondItem="KzO-SZ-g1g" secondAttribute="top" constant="23" id="pVd-74-CTq"/>
+                            <constraint firstItem="KzO-SZ-g1g" firstAttribute="bottom" secondItem="kga-Dt-K8p" secondAttribute="bottom" constant="12" id="znw-q2-Re8"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="KzO-SZ-g1g"/>
                     </view>
                     <navigationItem key="navigationItem" title="Audio detection" id="eqa-2O-0IG"/>
                     <connections>
-                        <outlet property="microphoneButton" destination="AC3-7n-zyD" id="zSG-3d-4sq"/>
-                        <outlet property="outputLabel" destination="qyW-tb-xxb" id="Oaq-7H-9GX"/>
+                        <outlet property="microphoneSwitch" destination="cO0-zL-Zef" id="ier-w4-X4i"/>
+                        <outlet property="tableView" destination="8D6-nW-RCC" id="Tcw-pi-4AP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2sD-cB-mC4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

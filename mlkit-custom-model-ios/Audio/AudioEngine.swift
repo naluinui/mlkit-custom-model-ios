@@ -2,7 +2,19 @@ import Foundation
 import AVFoundation
 
 class AudioEngine {
-    let audioEngine = AVAudioEngine()
+    
+    private let internalAudioEngine = AVAudioEngine()
+    
+    private let sampleRate: Int
+    private let windowLengthSamples: Int
+    
+    private var buffer: [Float]
+    
+    init(sampleRate: Int = 44100, windowLengthSeconds: Double = 1) {
+        self.sampleRate = sampleRate
+        windowLengthSamples = Int(Double(sampleRate) * windowLengthSeconds)
+        buffer = Array(repeating: 0, count: windowLengthSamples)
+    }
     
     func requestPermission(completion: @escaping (Bool) -> Void) {
         switch AVAudioSession.sharedInstance().recordPermission {
@@ -25,92 +37,85 @@ class AudioEngine {
     }
     
     func start(onBufferUpdated: @escaping ([Float]) -> Void) {
-        let input = audioEngine.inputNode
-//        input.installTap( onBus: 0,         // mono input
-//                              bufferSize: 44100, // a request, not a guarantee
-//                              format: nil,      // no format translation
-//                              block: { buffer, when in
-//
-//            // This block will be called over and over for successive buffers
-//            // of microphone data until you stop() AVAudioEngine
-//            let actualSampleCount = Int(buffer.frameLength)
-//
-//            print("samples \(actualSampleCount)")
-//            // buffer.floatChannelData?.pointee[n] has the data for point n
-//            var i=0
-//            while (i < actualSampleCount) {
-//                let val = buffer.floatChannelData?.pointee[i]
-//                // do something to each sample here...
-//                i += 1
-//            }
-//        })
-        
-//        let downMixer = AVAudioMixerNode()
-//        let main = audioEngine.mainMixerNode
-//
-//        let format = input.inputFormat(forBus: 0)
-//        let format16KHzMono = AVAudioFormat(commonFormat: AVAudioCommonFormat.pcmFormatInt16, sampleRate: 8000, channels: 1, interleaved: true)
-//
-//        audioEngine.attach(downMixer)
-//        downMixer.installTap(onBus: 0, bufferSize: 640, format: format16KHzMono) { (buffer, time) -> Void in
-//            do{
-//                print(buffer.description)
-//                if let channel1Buffer = buffer.int16ChannelData?[0] {
-//                    // print(channel1Buffer[0])
-//
-//                }
-//            }
-//        }
-//
-//        audioEngine.connect(input, to: downMixer, format: format)
-//        audioEngine.connect(downMixer, to: main, format: format16KHzMono)
-//        audioEngine.prepare()
-
+        let input = internalAudioEngine.inputNode
         let inputFormat = input.outputFormat(forBus: 0)
         
-        let outputFormat = AVAudioFormat(commonFormat: .pcmFormatInt16, sampleRate: Double(16000), channels: 1, interleaved: true)!
+        let outputFormat = AVAudioFormat(commonFormat: .pcmFormatInt16, sampleRate: Double(sampleRate), channels: 1, interleaved: true)!
         let formatConverter =  AVAudioConverter(from: inputFormat, to: outputFormat)!
         
-        input.installTap(onBus: 0, bufferSize: AVAudioFrameCount(32000), format: inputFormat) { (buffer, time) in
-          
-            DispatchQueue.global(qos: .background).async {
+        input.installTap(onBus: 0, bufferSize: AVAudioFrameCount(sampleRate*2), format: inputFormat) { (incomingBuffer, time) in
              
-                 let pcmBuffer = AVAudioPCMBuffer(pcmFormat: outputFormat, frameCapacity: AVAudioFrameCount(outputFormat.sampleRate * 2.0))
-                 var error: NSError? = nil
-                 
-                 let inputBlock: AVAudioConverterInputBlock = {inNumPackets, outStatus in
-                   outStatus.pointee = AVAudioConverterInputStatus.haveData
-                   return buffer
-                 }
-                 
-                
-                 formatConverter.convert(to: pcmBuffer!, error: &error, withInputFrom: inputBlock)
-                 
-                 if error != nil {
-                    print(error!.localizedDescription)
-                 }
-                 else if let channelData = pcmBuffer!.int16ChannelData {
-                   
-                    let channelDataPointer = channelData.pointee
-                    let channelData = stride(from: 0, to: 15600, by: buffer.stride).map { Float(channelDataPointer[$0]) / 32768.0 }
-                    onBufferUpdated(channelData)
-                 }
-            }
+            DispatchQueue.global(qos: .background).async {
             
+                let pcmBuffer = AVAudioPCMBuffer(pcmFormat: outputFormat, frameCapacity: AVAudioFrameCount(outputFormat.sampleRate * 2.0))
+                var error: NSError? = nil
+             
+                let inputBlock: AVAudioConverterInputBlock = { inNumPackets, outStatus in
+                    outStatus.pointee = AVAudioConverterInputStatus.haveData
+                    return incomingBuffer
+                }
+             
+                formatConverter.convert(to: pcmBuffer!, error: &error, withInputFrom: inputBlock)
+             
+                if error != nil {
+                    print(error!.localizedDescription)
+                }
+                else if let channelData = pcmBuffer!.int16ChannelData {
+               
+                    let channelDataPointer = channelData.pointee
+                    self.buffer = stride(from: 0, to: self.windowLengthSamples, by: 1).map { Float(channelDataPointer[$0]) / 32768.0 }
+                    onBufferUpdated(self.buffer)
+                }
+            }
         }
         
         do {
-            try audioEngine.start()
+            try internalAudioEngine.start()
         } catch let error as NSError {
             print("Got an error starting audioEngine: \(error.domain), \(error)")
         }
     }
     
     func stop() {
-        audioEngine.stop()
+        guard internalAudioEngine.isRunning else {
+            return
+        }
+        internalAudioEngine.inputNode.removeTap(onBus: 0)
+        internalAudioEngine.stop()
     }
     
     var isRunning: Bool {
-        return audioEngine.isRunning
+        return internalAudioEngine.isRunning
+    }
+    
+    func save(fileURL: URL, completion: @escaping (Bool) -> Void) {
+        
+        DispatchQueue.global(qos: .background).async {
+            let outputFormatSettings = [
+                AVFormatIDKey: kAudioFormatLinearPCM,
+                AVLinearPCMBitDepthKey: 32,
+                AVLinearPCMIsFloatKey: true,
+                AVSampleRateKey: Float64(self.sampleRate),
+                AVNumberOfChannelsKey: 1] as [String : Any]
+
+            let audioFile = try? AVAudioFile(forWriting: fileURL, settings: outputFormatSettings, commonFormat: AVAudioCommonFormat.pcmFormatFloat32, interleaved: true)
+            let bufferFormat = AVAudioFormat(settings: outputFormatSettings)!
+
+            let outputBuffer = AVAudioPCMBuffer(pcmFormat: bufferFormat, frameCapacity: AVAudioFrameCount(self.buffer.count))!
+
+            for i in 0..<self.buffer.count {
+                outputBuffer.floatChannelData!.pointee[i] = self.buffer[i]
+            }
+            outputBuffer.frameLength = AVAudioFrameCount(self.buffer.count)
+
+            do {
+                try audioFile?.write(from: outputBuffer)
+            } catch let error as NSError {
+                print("error:", error.localizedDescription)
+                completion(false)
+            }
+            
+            completion(true)
+        }
     }
 }

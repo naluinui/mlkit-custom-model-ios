@@ -5,9 +5,11 @@ import FirebaseMLModelInterpreter
 class YamnetInterpreter {
     
     var numOfSamples = 15600
+    var minConfidence: Float = 0.1
     
     private var interpreter: ModelInterpreter?
     private let inputOutputOptions = ModelInputOutputOptions()
+    private let labels = Labels()
     
     func prepare() {
         guard interpreter == nil else { return }
@@ -59,28 +61,15 @@ class YamnetInterpreter {
             
             let results = outputValues[0].map { $0.floatValue }
             
-            let indexOfMax = results.indexOfMax!
-            let maxScore = Score(index: indexOfMax, value: results[indexOfMax], label: "")
+            let scores = results.indices
+                .filter({ results[$0] > self.minConfidence })
+                .sorted(by: { results[$0] > results[$1] })
+                .map({ Score(index: $0, value: results[$0], label: self.labels.get(index: $0) ?? "") })
             
-            completion([maxScore])
+            completion(scores)
         }
     }
     
-}
-
-extension Array where Element: Comparable {
-    var indexOfMax: Int? {
-        guard var maxValue = self.first else { return nil }
-        var maxIndex = 0
-
-        for (index, value) in self.enumerated() {
-            if value > maxValue {
-                maxValue = value
-                maxIndex = index
-            }
-        }
-        return maxIndex
-   }
 }
 
 struct Score {
