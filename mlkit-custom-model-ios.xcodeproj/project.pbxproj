@@ -19,7 +19,6 @@
 		EDB9FFA823AE09580015F557 /* SumInterpreter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCBAE2E23A9E3830063E1CB /* SumInterpreter.swift */; };
 		EDB9FFAA23AE0F690015F557 /* TicTacToeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB9FFA923AE0F690015F557 /* TicTacToeViewController.swift */; };
 		EDB9FFAC23AE10250015F557 /* TicTacToeInterpreter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB9FFAB23AE10250015F557 /* TicTacToeInterpreter.swift */; };
-		EDD3BFC523F03EAA00C9ED1D /* yamnet.tflite in Resources */ = {isa = PBXBuildFile; fileRef = EDD3BFC423F03EAA00C9ED1D /* yamnet.tflite */; };
 		EDD3BFC723F03ECC00C9ED1D /* YamnetInterpreter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD3BFC623F03ECC00C9ED1D /* YamnetInterpreter.swift */; };
 		EDD3BFC923F03EFF00C9ED1D /* AudioViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD3BFC823F03EFF00C9ED1D /* AudioViewController.swift */; };
 		EDD3BFCB23F0492400C9ED1D /* dog_975ms.wav in Resources */ = {isa = PBXBuildFile; fileRef = EDD3BFCA23F0492400C9ED1D /* dog_975ms.wav */; };
@@ -45,7 +44,6 @@
 		EDB9FFA923AE0F690015F557 /* TicTacToeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicTacToeViewController.swift; sourceTree = "<group>"; };
 		EDB9FFAB23AE10250015F557 /* TicTacToeInterpreter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicTacToeInterpreter.swift; sourceTree = "<group>"; };
 		EDCBAE2E23A9E3830063E1CB /* SumInterpreter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SumInterpreter.swift; sourceTree = "<group>"; };
-		EDD3BFC423F03EAA00C9ED1D /* yamnet.tflite */ = {isa = PBXFileReference; lastKnownFileType = file; path = yamnet.tflite; sourceTree = "<group>"; };
 		EDD3BFC623F03ECC00C9ED1D /* YamnetInterpreter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YamnetInterpreter.swift; sourceTree = "<group>"; };
 		EDD3BFC823F03EFF00C9ED1D /* AudioViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioViewController.swift; sourceTree = "<group>"; };
 		EDD3BFCA23F0492400C9ED1D /* dog_975ms.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = dog_975ms.wav; sourceTree = "<group>"; };
@@ -127,7 +125,6 @@
 				EDD3BFCA23F0492400C9ED1D /* dog_975ms.wav */,
 				ED2DD79123A94990005BAD59 /* sum.tflite */,
 				AF7255AB23C0DF2200E92686 /* tictactoe.tflite */,
-				EDD3BFC423F03EAA00C9ED1D /* yamnet.tflite */,
 				EDD3BFCC23F04F3300C9ED1D /* yamnet_class_map.csv */,
 			);
 			path = Resources;
@@ -205,7 +202,6 @@
 			files = (
 				EDD3BFCD23F04F3300C9ED1D /* yamnet_class_map.csv in Resources */,
 				ED2DD79223A94990005BAD59 /* sum.tflite in Resources */,
-				EDD3BFC523F03EAA00C9ED1D /* yamnet.tflite in Resources */,
 				AF4B752322BF65A10062680D /* GoogleService-Info.plist in Resources */,
 				AF7255AC23C0DF2200E92686 /* tictactoe.tflite in Resources */,
 				AF4B751B22BF63DA0062680D /* LaunchScreen.storyboard in Resources */,

@@ -26,7 +26,7 @@ class YamnetInterpreter {
         
         try! inputOutputOptions.setInputFormat(index: 0, type: .float32, dimensions: [1,NSNumber(value: numOfSamples)])
         try! inputOutputOptions.setOutputFormat(index: 0, type: .float32, dimensions: [1,521])
-        try! inputOutputOptions.setOutputFormat(index: 1, type: .float32, dimensions: [1,96,64])
+        try! inputOutputOptions.setOutputFormat(index: 1, type: .float32, dimensions: [96,64])
     }
     
     func run(_ input: [Float], completion: @escaping ([Score]?) -> Void) {
